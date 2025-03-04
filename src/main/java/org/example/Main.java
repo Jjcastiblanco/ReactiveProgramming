@@ -1,19 +1,75 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.example.oneclass.publisher.PublisherImpl;
+import org.example.oneclass.publisher.SubscriptionImpl;
+import org.example.oneclass.subscriber.SubscriberImp;
+
+import java.time.Duration;
+
+/*
+    1. publisher does not produce data unless subscriber requests for it
+    2. publisher will produce only <= subscriber requested items. publisher can also produce 0 items!
+    3. subscriber can cancel the subscription. producer should stop at than moment as subscriber is no longer
+    interested in consuming the data
+    4. producer can send the error signal
+ */
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws InterruptedException {
+        demo4();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+    }
+    private static void demo1(){
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImp();
+        publisher.subscribe(subscriber);
+    }
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+    public static void  demo2() throws InterruptedException {
+
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImp();
+        publisher.subscribe(subscriber);
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+
+    }
+
+    public static void  demo3() throws InterruptedException {
+
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImp();
+        publisher.subscribe(subscriber);
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        subscriber.getSubscription().cancel();
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+
+    }
+
+    public static void  demo4() throws InterruptedException {
+
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImp();
+        publisher.subscribe(subscriber);
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(11);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.getSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+
     }
 }
