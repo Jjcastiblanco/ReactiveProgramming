@@ -1,4 +1,4 @@
-package org.example.oneclass.publisher;
+package org.example.sec01.publisher;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;

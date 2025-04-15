@@ -1,4 +1,4 @@
-package org.example.twoclass;
+package org.example.sec02;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,10 @@ public class Lec01LazyStream {
 
 
         Stream.of(1)
-                .peek(i-> log.info("received {}",i));
+                //peek no se ejecutara hasta que se ejecute el terminal o su operador
+                .peek(i-> log.info("received {}",i))
+                //toList es el operador el cual ara que se muestre el stream
+                .toList();
 
     }
 }
