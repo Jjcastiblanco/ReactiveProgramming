@@ -3,6 +3,27 @@ package org.example.sec04;
 import org.example.common.Util;
 import reactor.core.publisher.Flux;
 
+
+/*
+Es un método para crear un Flux (flujo de datos reactivo) donde tú controlas manualmente:
+
+Cuándo emitir elementos (next)
+
+Cuándo finalizar (complete)
+
+Cuándo notificar errores (error)
+
+Cómo manejar la presión de datos (backpressure)
+
+    *Necesitas integración con APIs no reactivas
+
+Quieres emitir eventos desde múltiples hilos
+
+Requieres control total sobre la emisión de datos
+
+Necesitas manejar manualmente el backpressure
+
+ */
 public class Lec01FluxCreate {
 
     /*
@@ -27,21 +48,21 @@ public class Lec01FluxCreate {
     public static void main(String[] args) {
 
         Flux.create(sink -> {
-//            sink.next(1);
-//            sink.next(2);
-//            sink.next(3);
+            sink.next(1);
+            sink.next(2);
+            sink.next(3);
 //            sink.complete();
 
 //            for (int i = 0; i < 10; i++) {
 //                sink.next(Util.faker().name().firstName());
 //            }
 //            sink.complete();
-            String country;
-            do {
-                country = Util.faker().address().country();
-                sink.next(country);
-            } while (country.equalsIgnoreCase("canada"));
-            sink.complete();
+//            String country;
+//            do {
+//                country = Util.faker().address().country();
+//                sink.next(country);
+//            } while (country.equalsIgnoreCase("canada"));
+//            sink.complete();
 
 
         }).subscribe( Util.subscriber()) ;
