@@ -6,7 +6,13 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+/*
+* Use FromCallable when you have a method that returns a value
+* Manage Exceptions
+* Operation is not secure
+* Utilice subscriberOn by thread block
 
+ */
 public class Lec06MonoFromCallable {
 
     private static final Logger log = LoggerFactory.getLogger(Lec06MonoFromCallable.class);

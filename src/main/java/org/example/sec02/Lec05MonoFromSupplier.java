@@ -7,6 +7,13 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+
+/*
+* Use FromSupplier when you have a method that returns a value
+* Use FromSupplier when the operation is secure
+* require try-catch
+*
+ */
 public class Lec05MonoFromSupplier {
 
     private static final Logger log = LoggerFactory.getLogger(Lec05MonoFromSupplier.class);

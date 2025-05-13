@@ -24,7 +24,7 @@ public class DefaultSubscriberImp<T> implements Subscriber<T> {
 
     @Override
     public void onNext(T item) {
-        log.info("received: {}",item);
+        log.info(this.name + " received: {}", item);
     }
 
     @Override
@@ -35,5 +35,6 @@ public class DefaultSubscriberImp<T> implements Subscriber<T> {
 
     @Override
     public void onComplete() {
+        log.info("{} completed", this.name);
     }
 }
