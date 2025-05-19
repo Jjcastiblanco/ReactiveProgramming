@@ -2,9 +2,13 @@ package org.example.common;
 
 import com.github.javafaker.Faker;
 import org.reactivestreams.Subscriber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
+import java.util.function.UnaryOperator;
 
 /*
 * @author Firstname Lastname
@@ -14,6 +18,8 @@ import java.time.Duration;
 * @This class is used to create subscribers
 * */
 public class Util {
+
+    public static final Logger log = LoggerFactory.getLogger(Util.class);
 
     private static final Faker faker = Faker.instance();
 
@@ -37,5 +43,13 @@ public class Util {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static <T> UnaryOperator<Flux<T>> fluxDebugger(String name) {
+
+        return flux -> flux.doOnSubscribe(s -> log.info("Subscribed to flux {}", name))
+                .doOnCancel(() -> log.info("Flux {} cancelled", name))
+                .doOnComplete(() -> log.info("Flux {} completed", name));//UnaryOperator
     }
 }
